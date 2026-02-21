@@ -8,11 +8,16 @@ import os
 
 class PredictionPipeline:
     def __init__(self):
-        # Use absolute path from current working directory
-        model_path = Path(os.getcwd()) / 'artifacts' / 'model_trainer' / 'model.joblib'
+        # Get the project root directory (3 levels up from this file: src/MLproject/pipeline/)
+        current_file = Path(__file__).resolve()
+        project_root = current_file.parent.parent.parent.parent
+        
+        # Build the model path
+        model_path = project_root / 'artifacts' / 'model_trainer' / 'model.joblib'
+        
         if not model_path.exists():
-            # Try relative path from src directory
-            model_path = Path('artifacts') / 'model_trainer' / 'model.joblib'
+            raise FileNotFoundError(f"Model file not found at: {model_path}")
+        
         self.model = joblib.load(model_path)
 
     

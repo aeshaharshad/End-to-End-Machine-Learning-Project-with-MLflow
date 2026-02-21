@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request
 import os 
+import sys
+from pathlib import Path
 import numpy as np
 import pandas as pd
+
+# Add src directory to Python path
+sys.path.insert(0, str(Path(__file__).parent / 'src'))
+
 from MLproject.pipeline.prediction import PredictionPipeline
 
 
