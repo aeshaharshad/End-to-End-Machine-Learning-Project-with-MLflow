@@ -1,206 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Web App</title>
-        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="static/css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>-->
-                    </ul>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Wine Quality Prediction Application" />
+    <title>Wine Quality Predictor</title>
+    <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="static/css/styles.css" rel="stylesheet" />
+    <link href="static/css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="static/css2/style.css"/>
+</head>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-wine-glass-alt" style="color: #8B0000;"></i> Wine Quality Predictor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header-->
+    <header class="masthead" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 0;">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7 text-center">
+                    <h1 class="display-4 fw-bold text-white mb-3">
+                        <i class="fas fa-wine-bottle"></i> Wine Quality Prediction
+                    </h1>
+                    <p class="lead text-white-50">Predict wine quality with AI-powered machine learning analysis</p>
                 </div>
             </div>
-        </nav>
-        <!-- Page Header-->
-        <header class="masthead" style="background-image: url('static/assets/img/wine.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Wine Quality Prediction</h1>
-                            <span class="subheading">A Wine Quality Checking Web App</span>
+        </div>
+    </header>
+
+    <!-- Main Content-->
+    <div class="container px-4 px-lg-5 py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!-- Form Card -->
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <h2 class="card-title text-white mb-0 py-3">
+                            <i class="fas fa-flask"></i> Enter Wine Analysis Parameters
+                        </h2>
+                    </div>
+
+                    <div class="card-body p-5">
+                        <form action="/predict" method="post" id="wineForm" class="needs-validation" novalidate>
+                            <!-- Row 1: Fixed & Volatile Acidity -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fixed_acidity" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-flask text-primary"></i> Fixed Acidity
+                                        </label>
+                                        <input type="number" step="0.01" min="0" name="fixed_acidity" id="fixed_acidity" 
+                                               class="form-control form-control-lg" placeholder="e.g., 7.4" required>
+                                        <small class="form-text text-muted">Tartaric acid concentration</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="volatile_acidity" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-flask text-primary"></i> Volatile Acidity
+                                        </label>
+                                        <input type="number" step="0.01" min="0" name="volatile_acidity" id="volatile_acidity" 
+                                               class="form-control form-control-lg" placeholder="e.g., 0.70" required>
+                                        <small class="form-text text-muted">Acetic acid level</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Citric Acid & Residual Sugar -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="citric_acid" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-flask text-primary"></i> Citric Acid
+                                        </label>
+                                        <input type="number" step="0.01" min="0" name="citric_acid" id="citric_acid" 
+                                               class="form-control form-control-lg" placeholder="e.g., 0.0" required>
+                                        <small class="form-text text-muted">Citric acid concentration</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="residual_sugar" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-sugar-cane text-success"></i> Residual Sugar
+                                        </label>
+                                        <input type="number" step="0.01" min="0" name="residual_sugar" id="residual_sugar" 
+                                               class="form-control form-control-lg" placeholder="e.g., 1.9" required>
+                                        <small class="form-text text-muted">grams per liter</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 3: Chlorides & Free Sulfur Dioxide -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="chlorides" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-flask text-warning"></i> Chlorides
+                                        </label>
+                                        <input type="number" step="0.001" min="0" name="chlorides" id="chlorides" 
+                                               class="form-control form-control-lg" placeholder="e.g., 0.076" required>
+                                        <small class="form-text text-muted">Salt concentration</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="free_sulfur_dioxide" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-cloud text-info"></i> Free SO₂
+                                        </label>
+                                        <input type="number" step="0.1" min="0" name="free_sulfur_dioxide" id="free_sulfur_dioxide" 
+                                               class="form-control form-control-lg" placeholder="e.g., 11" required>
+                                        <small class="form-text text-muted">milligrams per liter</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 4: Total Sulfur Dioxide & Density -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="total_sulfur_dioxide" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-cloud text-info"></i> Total SO₂
+                                        </label>
+                                        <input type="number" step="0.1" min="0" name="total_sulfur_dioxide" id="total_sulfur_dioxide" 
+                                               class="form-control form-control-lg" placeholder="e.g., 34" required>
+                                        <small class="form-text text-muted">milligrams per liter</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="density" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-weight text-danger"></i> Density
+                                        </label>
+                                        <input type="number" step="0.00001" min="0.9" max="1.1" name="density" id="density" 
+                                               class="form-control form-control-lg" placeholder="e.g., 0.9978" required>
+                                        <small class="form-text text-muted">g/mL</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 5: pH & Sulphates -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pH" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-flask-vial text-danger"></i> pH Level
+                                        </label>
+                                        <input type="number" step="0.01" min="0" max="14" name="pH" id="pH" 
+                                               class="form-control form-control-lg" placeholder="e.g., 3.51" required>
+                                        <small class="form-text text-muted">Acidity/Alkalinity scale</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sulphates" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-flask text-secondary"></i> Sulphates
+                                        </label>
+                                        <input type="number" step="0.01" min="0" name="sulphates" id="sulphates" 
+                                               class="form-control form-control-lg" placeholder="e.g., 0.56" required>
+                                        <small class="form-text text-muted">grams per liter</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 6: Alcohol Content -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="alcohol" class="form-label fw-semibold mb-2">
+                                            <i class="fas fa-wine-bottle text-danger"></i> Alcohol Content
+                                        </label>
+                                        <input type="number" step="0.1" min="0" max="20" name="alcohol" id="alcohol" 
+                                               class="form-control form-control-lg" placeholder="e.g., 9.4" required>
+                                        <small class="form-text text-muted">% by volume</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Alert Info -->
+                            <div class="alert alert-info border-0" role="alert">
+                                <i class="fas fa-info-circle"></i>
+                                <strong>Note:</strong> Ensure all values are within realistic ranges for wine analysis
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-lg btn-primary" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; padding: 12px 40px;">
+                                    <i class="fas fa-magic"></i> Predict Wine Quality
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Info Section -->
+                <div class="row mt-5">
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <i class="fas fa-microchip fa-3x text-primary mb-3"></i>
+                            <h5>AI Powered</h5>
+                            <p class="text-muted small">Machine learning model trained on thousands of wine samples</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <i class="fas fa-flask-vial fa-3x text-success mb-3"></i>
+                            <h5>Chemical Analysis</h5>
+                            <p class="text-muted small">Evaluates 11 key chemical properties for prediction</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center">
+                            <i class="fas fa-lightning-bolt fa-3x text-warning mb-3"></i>
+                            <h5>Real-Time Results</h5>
+                            <p class="text-muted small">Get instant quality predictions in seconds</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
-
-
-        <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-
-           <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Form-v9 by Colorlib</title>
-	<!-- Mobile Specific Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!-- Font-->
-	<link rel="stylesheet" type="text/css" href="static/css2/nunito-font.css">
-	<!-- Main Style Css -->
-    <link rel="stylesheet" href="static/css2/style.css"/>
-</head>
-<body class="form-v9">
-	<div class="page-content">
-		<div class="form-v9-content" style="background-image: url('static/assets/img/form-v9.jpg')">
-			<form class="form-detail" action="/predict" method="post">
-				<h2>Please Fill The Information</h2>
-				<div class="form-row-total">
-
-					<div class="form-row">
-                        <label for="fixed_acidity"> Fixed Acidity:</label>
-						<input type="text" name="fixed_acidity" id="fixed_acidity" class="input-text" placeholder="fixed_acidity" required>
-					</div>
-
-					<div class="form-row">
-                        <label for="volatile_acidity"> Volatile Acidity:</label>
-						<input type="text" name="volatile_acidity" id="volatile_acidity" class="input-text" placeholder="volatile_acidity" required>
-					</div>
-
-				</div>
-
-
-				<div class="form-row-total">
-
-                    <div class="form-row">
-                        <label for="citric_acid"> Citric Acid:</label>
-						<input type="text" name="citric_acid" id="citric_acid" class="input-text" placeholder="citric_acid" required>
-					</div>
-
-
-                    <div class="form-row">
-                        <label for="residual_sugar"> Residual Sugar:</label>
-						<input type="text" name="residual_sugar" id="residual_sugar" class="input-text" placeholder="residual_sugar" required>
-					</div>
-
-				</div>
-
-
-                <div class="form-row-total">
-
-                    <div class="form-row">
-                        <label for="chlorides"> Chlorides:</label>
-						<input type="text" name="chlorides" id="chlorides" class="input-text" placeholder="chlorides" required>
-					</div>
-
-                    <div class="form-row">
-                        <label for="free_sulfur_dioxide"> Free Sulfur Dioxide:</label>
-						<input type="text" name="free_sulfur_dioxide" id="free_sulfur_dioxide" class="input-text" placeholder="free_sulfur_dioxide" required>
-					</div>
-
-				</div>
-
-
-                <div class="form-row-total">
-
-                    <div class="form-row">
-                        <label for="total_sulfur_dioxide"> Total Sulfur Dioxide:</label>
-						<input type="text" name="total_sulfur_dioxide" id="total_sulfur_dioxide" class="input-text" placeholder="total_sulfur_dioxide" required>
-					</div>
-
-                    <div class="form-row">
-                        <label for="density"> Density:</label>
-						<input type="text" name="density" id="density" class="input-text" placeholder="density" required>
-					</div>
-
-				</div>
-
-
-                <div class="form-row-total">
-
-                    <div class="form-row">
-                        <label for="pH"> pH:</label>
-						<input type="text" name="pH" id="pH" class="input-text" placeholder="pH" required>
-					</div>
-
-                    <div class="form-row">
-                        <label for="sulphates"> Sulphates:</label>
-						<input type="text" name="sulphates" id="sulphates" class="input-text" placeholder="sulphates" required>
-					</div>
-
-				</div>
-
-
-                <div class="form-row-total">
-
-                    <div class="form-row">
-                        <label for="alcohol"> Alcohol:</label>
-						<input type="text" name="alcohol" id="alcohol" class="input-text" placeholder="alcohol" required>
-					</div>
-
-
-				</div>
-
-
-				<div class="form-row-last">
-					<input type="submit" name="register" class="register" value="Predict">
-				</div>
-			</form>
-		</div>
-	</div>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
-
         </div>
+    </div>
 
-
-        <!-- Footer-->
-        <footer class="border-top">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <ul class="list-inline text-center">
-                            <li class="list-inline-item">
-                                <a href="www.linkedin.com/in/aeshah-arshad-44286b252">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                           
-                            <li class="list-inline-item">
-                                <a href="https://github.com/aeshaharshad">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="small text-center text-muted fst-italic"></div>
-                        <div class="small text-center text-muted fst-italic"></div>
+    <!-- Footer-->
+    <footer class="footer-section bg-dark text-white py-5 mt-5">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="text-center">
+                        <h5 class="mb-3">Connect With Me</h5>
+                        <div class="social-links mb-3">
+                            <a href="https://www.linkedin.com/in/aeshah-arshad-44286b252" target="_blank" class="btn btn-sm btn-outline-light me-2">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/aeshaharshad" target="_blank" class="btn btn-sm btn-outline-light">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                        <p class="text-muted small">Wine Quality Prediction ML Project | Flask | MLflow | AWS CI/CD</p>
+                        <p class="text-muted small">&copy; 2024. Built with ❤️ using Machine Learning</p>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="static/js/scripts.js"></script>
-    </body>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="static/js/scripts.js"></script>
+    <script>
+        // Improved form validation
+        document.getElementById('wineForm').addEventListener('submit', function(e) {
+            const inputs = this.querySelectorAll('input[type="number"]');
+            let allFilled = true;
+            
+            inputs.forEach(input => {
+                const value = input.value.trim();
+                // Check if field is empty or not a valid number
+                if (value === '' || isNaN(parseFloat(value))) {
+                    allFilled = false;
+                    input.classList.add('is-invalid');
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+            
+            if (!allFilled) {
+                e.preventDefault();
+                e.stopPropagation();
+                alert('⚠️ Please fill all fields with valid numbers');
+                return false;
+            }
+        });
+
+        // Add visual feedback on input
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', function() {
+                const value = this.value.trim();
+                if (value === '' || isNaN(parseFloat(value))) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+
+            input.addEventListener('focus', function() {
+                if (this.value && !isNaN(parseFloat(this.value))) {
+                    this.classList.add('border-primary');
+                }
+            });
+            
+            input.addEventListener('blur', function() {
+                this.classList.remove('border-primary');
+            });
+        });
+    </script>
+</body>
 </html>

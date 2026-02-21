@@ -3,59 +3,236 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Prediction</title>
+        <meta name="description" content="Wine Quality Prediction Result" />
+        <title>Prediction Result - Wine Quality</title>
         <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <link href="static/css/styles.css" rel="stylesheet" />
+        <style>
+            .result-container {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .result-card {
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                padding: 60px 40px;
+                text-align: center;
+                max-width: 600px;
+                width: 100%;
+            }
+            .result-icon {
+                font-size: 80px;
+                margin-bottom: 20px;
+                animation: bounce 2s infinite;
+            }
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+            }
+            .result-title {
+                font-size: 32px;
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 30px;
+            }
+            .result-score {
+                font-size: 72px;
+                font-weight: 800;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin: 30px 0;
+                font-family: 'Poppins', sans-serif;
+            }
+            .quality-badge {
+                display: inline-block;
+                padding: 12px 30px;
+                border-radius: 25px;
+                font-weight: 600;
+                font-size: 18px;
+                margin: 20px 0;
+            }
+            .quality-excellent {
+                background: #10b981;
+                color: white;
+            }
+            .quality-good {
+                background: #3b82f6;
+                color: white;
+            }
+            .quality-average {
+                background: #f59e0b;
+                color: white;
+            }
+            .quality-poor {
+                background: #ef4444;
+                color: white;
+            }
+            .result-message {
+                font-size: 18px;
+                color: #666;
+                margin: 20px 0 30px;
+                line-height: 1.6;
+            }
+            .action-buttons {
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+                margin-top: 40px;
+            }
+            .btn-action {
+                padding: 12px 30px;
+                border-radius: 25px;
+                border: none;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 16px;
+            }
+            .btn-home {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+            }
+            .btn-home:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            }
+            .error-message {
+                background: #fee;
+                border-left: 4px solid #ef4444;
+                padding: 20px;
+                border-radius: 8px;
+                color: #666;
+                font-size: 16px;
+            }
+            .score-info {
+                background: #f0f4ff;
+                padding: 20px;
+                border-radius: 15px;
+                margin-top: 30px;
+                text-align: left;
+            }
+            .info-item {
+                display: flex;
+                align-items: center;
+                margin: 10px 0;
+                color: #666;
+            }
+            .info-item i {
+                margin-right: 10px;
+                color: #667eea;
+                font-size: 18px;
+            }
+        </style>
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>-->
-<!--                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>-->
-                    </ul>
-                </div>
+                <a class="navbar-brand fw-bold" href="/">
+                    <i class="fas fa-wine-glass-alt" style="color: #8B0000;"></i> Wine Quality Predictor
+                </a>
             </div>
         </nav>
-        <!-- Page Header-->
-        <header class="masthead" style="background-image: url('static/assets/img/wine.gif')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Wine Quality Prediction Result</h1>
-                            <h2 style="color: #00ff00; font-size: 3rem; font-weight: bold; margin-top: 30px;">
-                                {% if prediction is string %}
-                                    {{ prediction }}
-                                {% else %}
-                                    {{ "%.2f"|format(prediction) }}
-                                {% endif %}
-                            </h2>
-                            <span class="subheading" style="margin-top: 20px;">
-                                <a href="/" style="color: white; text-decoration: underline;">← Back to Home</a>
-                            </span>
+
+        <!-- Result Container -->
+        <div class="result-container">
+            <div class="result-card">
+                {% if prediction is string %}
+                    <!-- Error Case -->
+                    <div class="result-icon" style="color: #ef4444;">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h1 class="result-title">Prediction Error</h1>
+                    <div class="error-message">
+                        {{ prediction }}
+                    </div>
+                    <p class="result-message" style="margin-top: 30px;">
+                        Please check your input values and try again.
+                    </p>
+                {% else %}
+                    <!-- Success Case -->
+                    <div class="result-icon" style="color: #10b981;">
+                        <i class="fas fa-wine-glass-alt"></i>
+                    </div>
+                    <h1 class="result-title">Prediction Complete!</h1>
+                    
+                    <div class="result-score">
+                        {{ "%.1f"|format(prediction) }}
+                    </div>
+
+                    <!-- Quality Badge -->
+                    {% if prediction >= 7.0 %}
+                        <div class="quality-badge quality-excellent">
+                            <i class="fas fa-star"></i> Excellent Quality
+                        </div>
+                        <p class="result-message">
+                            Outstanding wine with exceptional characteristics. Superior balance, aroma, and taste profile. 
+                            A premium selection perfect for collectors.
+                        </p>
+                    {% elif prediction >= 6.0 %}
+                        <div class="quality-badge quality-good">
+                            <i class="fas fa-thumbs-up"></i> Good Quality
+                        </div>
+                        <p class="result-message">
+                            Well-balanced wine with pleasant characteristics. Good flavor complexity and suitable acidity. 
+                            Recommended for regular enjoyment.
+                        </p>
+                    {% elif prediction >= 4.5 %}
+                        <div class="quality-badge quality-average">
+                            <i class="fas fa-minus-circle"></i> Average Quality
+                        </div>
+                        <p class="result-message">
+                            Acceptable wine with moderate characteristics. Some imbalance in chemical properties but drinkable.
+                            May need time to develop or best enjoyed within specific contexts.
+                        </p>
+                    {% else %}
+                        <div class="quality-badge quality-poor">
+                            <i class="fas fa-times-circle"></i> Below Average
+                        </div>
+                        <p class="result-message">
+                            Lower quality wine with noticeable deficiencies. Chemical properties suggest potential issues 
+                            with fermentation, preservation, or aging.
+                        </p>
+                    {% endif %}
+
+                    <!-- Additional Info -->
+                    <div class="score-info">
+                        <div class="info-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Score Range:</strong> 3.0 - 8.0</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-brain"></i>
+                            <span><strong>Algorithm:</strong> ElasticNet Regression</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-database"></i>
+                            <span><strong>Dataset:</strong> UCI Wine Quality</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span><strong>Model Type:</strong> Supervised Learning (Regression)</span>
                         </div>
                     </div>
+                {% endif %}
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="/" class="btn-action btn-home">
+                        <i class="fas fa-arrow-left"></i> Make Another Prediction
+                    </a>
                 </div>
             </div>
-        </header>
+        </div>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
