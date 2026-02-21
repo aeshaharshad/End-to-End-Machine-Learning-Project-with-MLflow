@@ -85,7 +85,7 @@ export MLFLOW_TRACKING_PASSWORD=<your_dagshub_token>
 
 set MLFLOW_TRACKING_URI=https://dagshub.com/aaa2633522/End-to-End-Machine-Learning-Project-with-MLflow.mlflow
 set MLFLOW_TRACKING_USERNAME=aaa2633522 
-set MLFLOW_TRACKING_PASSWORD=fc1a8d0d535c4be5b24e23b5a04df24c5883b4b3
+set MLFLOW_TRACKING_PASSWORD=<your_dagshub_token>
 
 ```
 
