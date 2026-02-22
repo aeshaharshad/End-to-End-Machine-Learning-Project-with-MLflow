@@ -64,7 +64,7 @@ open up you local host and port
 [dagshub](https://dagshub.com/)
 
 import dagshub
-dagshub.init(repo_owner='aaa2633522', repo_name='End-to-End-Machine-Learning-Project-with-MLflow', mlflow=True)
+dagshub.init()
 
 import mlflow
 with mlflow.start_run():
@@ -125,7 +125,7 @@ set MLFLOW_TRACKING_PASSWORD=<your_dagshub_token>
 
 	
 ## 3. Create ECR repo to store/save docker image
-    - Save the URI: 973729777767.dkr.ecr.eu-north-1.amazonaws.com/mlproj
+    - Save the URI: 
 
 	
 ## 4. Create EC2 machine (Ubuntu) 
